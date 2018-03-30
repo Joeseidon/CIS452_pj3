@@ -16,7 +16,7 @@ class MemFrame(Label):
     
     free = True
     
-    content = 'Frame'
+    content = 'Free'
     PID = 0
     pageType = ""
     page = 0
@@ -43,5 +43,23 @@ class MemFrame(Label):
         self.PID = PID
         self.pageType = pageType
         self.page = page
+        if pageType == "CODE":
+            t = "Code-"+str(page)+ " of P" + str(PID)
+            self.config(text = t)
+            self.update_idletasks()
+        else:
+            t = "Data-"+str(page)+ " of P" + str(PID)
+            self.config(text = t)
+            self.update_idletasks()
+            
+    def freeFrame(self):
+        self.free = True
+        self.PID = 737
+        self.pageType = ""
+        self.page = 0
+        self.config(text="Free")
+        self.update_idletasks()
         
+    def getFrameID(self):
+        return self.frameID
         

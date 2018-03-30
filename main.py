@@ -11,7 +11,7 @@ root = Tk()
 outputText = Text(root)
 inputText = Text(root) 
 
-ram = RAM(root,8,500)
+ram = RAM(root,8,512)
 
 cmdCount = 0
 index = 0
@@ -22,12 +22,13 @@ def processCMD(cmdStr):
     print(words)
     
     if words[1] == '-1\n' or words[1] == '-1':
-        output = 'PID: ' + words[0] + ' Terminate\n'
-        
+        output = 'PID: ' + words[0] + ' Terminates\n'
+        intext = words[0] + " " + words[1] + "\n"       
         #remove process = PID from process queue and reallocate memory
-        
+        ram.removeProcess(int(words[0]))
     else:
-        output = 'PID: ' + words[0] + ' Code/Text: ' + words[1] + ' Data: ' + words[2]
+        intext = words[0] + " " + words[1] + " " + words[2] + "\n"
+        output = 'PID: ' + words[0] + ' arrives: '+'\tCode/Text: ' + words[1] + '\tData: ' + words[2]
         PID = int(words[0])
         dataSIZE = int(words[2])
         codeSIZE = int(words[1])
@@ -43,7 +44,8 @@ def processCMD(cmdStr):
             print("Load Failed")
             x.processData(dataSIZE,codeSIZE)
         
-    inputText.insert(INSERT,output)
+    inputText.insert(INSERT,intext)
+    outputText.insert(INSERT,output)
     
 def nextCMD():
     global index

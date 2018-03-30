@@ -29,6 +29,12 @@ class RAM(LabelFrame):
         for i in range(numFrames):
             self.frame_list.append(MemFrame(self, FrameSize, i))
             
+    def loadTable(self,frame,pid,segment,pagenum):
+        self.frame_Table['PID'].append(pid)
+        self.frame_Table['frameID'].append(frame)
+        self.frame_Table['Segment'].append(segment)
+        self.frame_Table['PageNum'].append(pagenum)
+            
     def loadProcess(self, executable):
         #if process cannot be added, set to false
         pstatus = False
@@ -43,6 +49,7 @@ class RAM(LabelFrame):
                     executable.addCodeLink(i,x.frameID)
                     pstatus = True
                     x.loadPage(executable.getPID(),'CODE',i)
+                    self.loadTable(x.getFrameID(),executable.getPID(),'CODE',i)
                     break #frame found
         for i in range(dcount):
             for x in self.frame_list:
@@ -50,6 +57,7 @@ class RAM(LabelFrame):
                     executable.addDataLink(i,x.frameID)
                     cstatus = True
                     x.loadPage(executable.getPID(),'DATA',i)
+                    self.loadTable(x.getFrameID(),executable.getPID(),'DATA',i)
                     break #frame found
         
         return pstatus & cstatus
@@ -57,6 +65,15 @@ class RAM(LabelFrame):
     def removeProcess(self, PID):
         #if process cannot be removed, set to false
         status = True
+        
+        for i in self.frame_Table['PID']:
+            if i == PID:
+                del self.frame_Table['PID'][i]
+                self.frame_list[self.frame_Table['frameID'][i]].freeFrame()
+                del self.frame_Table['frameID'][i]
+                del self.frame_Table['Segment'][i]
+                del self.frame_Table['PageNum'][i]
+                
         
         
         return status
