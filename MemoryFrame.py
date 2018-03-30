@@ -30,9 +30,6 @@ class MemFrame(Label):
         self.MaxSize = frameSize
         self.frameID = frameId
         
-        
-        print('Frame Created'+str(self.frameID))
-        
         self.pack(side=RIGHT)
         
     def isFree(self):

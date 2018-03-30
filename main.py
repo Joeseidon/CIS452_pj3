@@ -19,7 +19,6 @@ processQueue = []
 
 def processCMD(cmdStr):
     words = cmdStr.split(" ") 
-    print(words)
     
     if words[1] == '-1\n' or words[1] == '-1':
         output = 'PID: ' + words[0] + ' Terminates\n'
@@ -37,12 +36,19 @@ def processCMD(cmdStr):
         
         processQueue.append(x)
         
+        x.printPageTables()
+        
         #Allocate Memory
         if ram.loadProcess(x):
-            x.processData(dataSIZE,codeSIZE)
+            #x.processData(dataSIZE,codeSIZE)
+            x.printPageTables()
         else:
             print("Load Failed")
-            x.processData(dataSIZE,codeSIZE)
+            #x.processData(dataSIZE,codeSIZE)
+            x.printPageTables()
+        
+    ram.printMemoryTable()
+        
         
     inputText.insert(INSERT,intext)
     outputText.insert(INSERT,output)
@@ -62,15 +68,11 @@ if __name__ == '__main__':
         inputCMDs=(file.readlines())
         cmdCount = len(inputCMDs)
         
-    print(inputCMDs)
-    #inputText.insert(INSERT,inputCMDs)
     inputText.pack(side=LEFT)
     outputText.pack(side=RIGHT)
     
     button = Button(root, text="Next", command=nextCMD)
 
     button.pack(side=BOTTOM)
-    
-    print('input commands')
     
     root.mainloop(0)

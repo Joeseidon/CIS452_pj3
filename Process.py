@@ -12,15 +12,7 @@ class process(object):
     classdocs
     '''
     
-    #maps data and code sections to pages and frames
-    dataPageTable = {"Page" : [], "Frame" : []}
-    codePageTable = {"Page" : [], "Frame" : []}
     
-    dataIndex = 0
-    codeIndex = 0
-    
-    codePageCount = 0
-    dataPageCount = 0
     
     
     def __init__(self, dataSize, codeSize, processID, frameSize):
@@ -34,7 +26,22 @@ class process(object):
         self.codePageCount = ceil(codeSize / frameSize)
         self.PID = processID
         
-        print("PID: "+str(self.PID)+" "+str(self.dataPageCount)+" "+str(self.codePageCount))
+        #print("PID: "+str(self.PID)+" "+str(self.dataPageCount)+" "+str(self.codePageCount))
+    
+        #maps data and code sections to pages and frames
+        self.dataPageTable = {"Page" : [], "Frame" : []}
+        self.codePageTable = {"Page" : [], "Frame" : []}
+        
+        self.dataIndex = 0
+        self.codeIndex = 0
+        
+    def printPageTables(self):
+        print("Process: "+str(self.PID))
+        print("TYPE:\tPAGE:\tFRAME")
+        for i in self.dataPageTable["Page"]:
+            print("data\t"+str(i)+"\t"+str(self.dataPageTable["Frame"][i]))
+        for i in self.codePageTable["Page"]:
+            print("code\t"+str(i)+"\t"+str(self.codePageTable["Frame"][i]))
         
     def processData(self,dataSIZE,codeSIZE):
         print("Proces: "+str(self.PID)+ " Loaded into RAM\n")

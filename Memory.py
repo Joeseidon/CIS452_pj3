@@ -14,7 +14,7 @@ class RAM(LabelFrame):
     
     frame_Table = {"frameID" : [], "PID" : [], "Segment" : [], "PageNum" : []}
     
-
+    
     def __init__(self, master, numFrames, FrameSize):
         '''
         Constructor
@@ -61,13 +61,27 @@ class RAM(LabelFrame):
                     break #frame found
         
         return pstatus & cstatus
-        
+    
+    def printMemoryTable(self):
+        x = 0
+        print("Physical Memory <-> Frame Table")
+        print("FRAME:\tPID:\tTYPE:\tPAGE:")
+        for i in self.frame_Table["frameID"]:
+            if len(self.frame_Table["PID"]) <= x :
+                print(str(i) + "\t--\t--\t--")
+            else:
+                print(str(i) + "\t" + str(self.frame_Table["PID"][x]) + "\t" + str(self.frame_Table["Segment"][x]) + "\t" + str(self.frame_Table["PageNum"][x]))
+                x=x+1
+      
     def removeProcess(self, PID):
         #if process cannot be removed, set to false
         status = True
         
-        for i in self.frame_Table['PID']:
-            if i == PID:
+        #for i in self.frame_Table['PID']:
+        l = len(self.frame_Table['PID'])
+        for i in range(l-1,-1,-1):
+            print('comparing: i=' + str(self.frame_Table['PID'][i])+" to pid="+str(PID) + " len="+str(len(self.frame_Table['PID'])))
+            if self.frame_Table['PID'][i] == PID:
                 del self.frame_Table['PID'][i]
                 self.frame_list[self.frame_Table['frameID'][i]].freeFrame()
                 del self.frame_Table['frameID'][i]
