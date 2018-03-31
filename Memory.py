@@ -19,8 +19,8 @@ class RAM(LabelFrame):
         '''
         Constructor
         '''
-        Frame.__init__(self,master, bd=4)
-        self.grid()
+        LabelFrame.__init__(self,master, bd=4)
+        #self.grid()
         self.createFrames(numFrames, FrameSize)
         
         self.pack(fill="both", expand="yes")
@@ -62,15 +62,19 @@ class RAM(LabelFrame):
         
         return pstatus & cstatus
     
-    def printMemoryTable(self):
+    def printMemoryTable(self,display):
         x = 0
-        print("Physical Memory <-> Frame Table")
-        print("FRAME:\tPID:\tTYPE:\tPAGE:")
+        #print("Physical Memory <-> Frame Table")
+        display.insert(INSERT,"Physical Memory <-> Frame Table"+"\n")
+        display.insert(INSERT,"FRAME:\tPID:\tTYPE:\tPAGE:"+"\n")
+        #print("FRAME:\tPID:\tTYPE:\tPAGE:")
         for i in self.frame_Table["frameID"]:
             if len(self.frame_Table["PID"]) <= x :
-                print(str(i) + "\t--\t--\t--")
+                #print(str(i) + "\t--\t--\t--")
+                display.insert(INSERT,(str(i) + "\t--\t--\t--")+"\n")
             else:
-                print(str(i) + "\t" + str(self.frame_Table["PID"][x]) + "\t" + str(self.frame_Table["Segment"][x]) + "\t" + str(self.frame_Table["PageNum"][x]))
+                #print(str(i) + "\t" + str(self.frame_Table["PID"][x]) + "\t" + str(self.frame_Table["Segment"][x]) + "\t" + str(self.frame_Table["PageNum"][x]))
+                display.insert(INSERT,(str(i) + "\t" + str(self.frame_Table["PID"][x]) + "\t" + str(self.frame_Table["Segment"][x]) + "\t" + str(self.frame_Table["PageNum"][x])+"\n"))
                 x=x+1
       
     def removeProcess(self, PID):
@@ -80,7 +84,7 @@ class RAM(LabelFrame):
         #for i in self.frame_Table['PID']:
         l = len(self.frame_Table['PID'])
         for i in range(l-1,-1,-1):
-            print('comparing: i=' + str(self.frame_Table['PID'][i])+" to pid="+str(PID) + " len="+str(len(self.frame_Table['PID'])))
+            #print('comparing: i=' + str(self.frame_Table['PID'][i])+" to pid="+str(PID) + " len="+str(len(self.frame_Table['PID'])))
             if self.frame_Table['PID'][i] == PID:
                 del self.frame_Table['PID'][i]
                 self.frame_list[self.frame_Table['frameID'][i]].freeFrame()

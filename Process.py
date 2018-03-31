@@ -6,6 +6,7 @@ Created on Mar 28, 2018
 from math import ceil
 from test.test_codecs import CodePageTest
 from pip._vendor.distlib.locators import Page
+from tkinter import *
 
 class process(object):
     '''
@@ -35,13 +36,17 @@ class process(object):
         self.dataIndex = 0
         self.codeIndex = 0
         
-    def printPageTables(self):
-        print("Process: "+str(self.PID))
-        print("TYPE:\tPAGE:\tFRAME")
+    def printPageTables(self,display):
+        #print("Process: "+str(self.PID))
+        #print("TYPE:\tPAGE:\tFRAME")
+        display.insert(INSERT,"Process: "+str(self.PID)+"\n")
+        display.insert(INSERT,("TYPE:\tPAGE:\tFRAME")+"\n")
         for i in self.dataPageTable["Page"]:
-            print("data\t"+str(i)+"\t"+str(self.dataPageTable["Frame"][i]))
+            #print("data\t"+str(i)+"\t"+str(self.dataPageTable["Frame"][i]))
+            display.insert(INSERT,("data\t"+str(i)+"\t"+str(self.dataPageTable["Frame"][i])+"\n"))
         for i in self.codePageTable["Page"]:
-            print("code\t"+str(i)+"\t"+str(self.codePageTable["Frame"][i]))
+            #print("code\t"+str(i)+"\t"+str(self.codePageTable["Frame"][i]))
+            display.insert(INSERT,("code\t"+str(i)+"\t"+str(self.codePageTable["Frame"][i])+"\n"))
         
     def processData(self,dataSIZE,codeSIZE):
         print("Proces: "+str(self.PID)+ " Loaded into RAM\n")

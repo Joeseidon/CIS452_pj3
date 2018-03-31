@@ -7,9 +7,15 @@ from tkinter import *
 from Memory import RAM
 from Process import process
 from asyncio.tasks import wait
+from scrollingText import TextObj
+
+
 root = Tk()
-outputText = Text(root)
-inputText = Text(root) 
+#outputText = Text(root,relief="sunken")
+#inputText = Text(root,relief="sunken")
+
+inputText = TextObj(root)
+outputText = TextObj(root)
 
 ram = RAM(root,8,512)
 
@@ -22,12 +28,19 @@ def processCMD(cmdStr):
     
     if words[1] == '-1\n' or words[1] == '-1':
         output = 'PID: ' + words[0] + ' Terminates\n'
-        intext = words[0] + " " + words[1] + "\n"       
+        intext = words[0] + " " + words[1] + "\n"
+        
+        inputText.insert(INSERT,intext)
+        outputText.insert(INSERT,output)       
         #remove process = PID from process queue and reallocate memory
         ram.removeProcess(int(words[0]))
     else:
         intext = words[0] + " " + words[1] + " " + words[2] + "\n"
         output = 'PID: ' + words[0] + ' arrives: '+'\tCode/Text: ' + words[1] + '\tData: ' + words[2]
+        
+        inputText.insert(INSERT,intext)
+        outputText.insert(INSERT,output)
+        
         PID = int(words[0])
         dataSIZE = int(words[2])
         codeSIZE = int(words[1])
@@ -36,22 +49,21 @@ def processCMD(cmdStr):
         
         processQueue.append(x)
         
-        x.printPageTables()
+        x.printPageTables(display=outputText)
         
         #Allocate Memory
         if ram.loadProcess(x):
             #x.processData(dataSIZE,codeSIZE)
-            x.printPageTables()
+            x.printPageTables(display=outputText)
         else:
             print("Load Failed")
             #x.processData(dataSIZE,codeSIZE)
-            x.printPageTables()
+            x.printPageTables(display=outputText)
         
-    ram.printMemoryTable()
+    ram.printMemoryTable(display=outputText)
         
         
-    inputText.insert(INSERT,intext)
-    outputText.insert(INSERT,output)
+    
     
 def nextCMD():
     global index
