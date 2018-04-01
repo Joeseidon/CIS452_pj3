@@ -9,14 +9,9 @@ from pip._vendor.distlib.locators import Page
 from tkinter import *
 
 class process(object):
-    '''
-    classdocs
-    '''
-    
+
     def __init__(self, dataSize, codeSize, processID, frameSize):
-        '''
-        Constructor
-        '''
+
         self.dataSIZE = dataSize
         self.dataPageCount = ceil(dataSize / frameSize)
         
@@ -24,7 +19,6 @@ class process(object):
         self.codePageCount = ceil(codeSize / frameSize)
         self.PID = processID
         
-        #print("PID: "+str(self.PID)+" "+str(self.dataPageCount)+" "+str(self.codePageCount))
     
         #maps data and code sections to pages and frames
         self.dataPageTable = {"Page" : [], "Frame" : []}
@@ -34,15 +28,11 @@ class process(object):
         self.codeIndex = 0
         
     def printPageTables(self,display):
-        #print("Process: "+str(self.PID))
-        #print("TYPE:\tPAGE:\tFRAME")
         display.insert(INSERT,"\nProcess: "+str(self.PID)+" Page Table\n")
         display.insert(INSERT,("TYPE:\tPAGE:\tFRAME")+"\n")
         for i in self.dataPageTable["Page"]:
-            #print("data\t"+str(i)+"\t"+str(self.dataPageTable["Frame"][i]))
             display.insert(INSERT,("data\t"+str(i)+"\t"+str(self.dataPageTable["Frame"][i])+"\n"))
         for i in self.codePageTable["Page"]:
-            #print("code\t"+str(i)+"\t"+str(self.codePageTable["Frame"][i]))
             display.insert(INSERT,("code\t"+str(i)+"\t"+str(self.codePageTable["Frame"][i])+"\n"))
         
     def processData(self,dataSIZE,codeSIZE):
@@ -56,13 +46,11 @@ class process(object):
     def getPID(self):
         return self.PID
     def addDataLink(self,page,frame):
-        print("add P:"+str(page)+ " F:"+str(frame))
         self.dataPageTable["Page"].append(page)
         self.dataPageTable["Frame"].append(frame)
         self.dataIndex=self.dataIndex+1
     
     def addCodeLink(self,page,frame):
-        print("add P:"+str(page)+ " F:"+str(frame))
         self.codePageTable["Page"].append(page)
         self.codePageTable["Frame"].append(frame)
         self.codeIndex=self.dataIndex+1

@@ -5,20 +5,13 @@ Created on Mar 31, 2018
 '''
 import tkinter as tki
 class TextObj(tki.Frame):
-    '''
-    classdocs
-    '''
-
-
+ 
     def __init__(self, master):
-        '''
-        Constructor
-        '''
         tki.Frame.__init__(self,master, width=600, height=600)
         self.pack(fill="both", expand=True)
-        # ensure a consistent GUI size
+
         self.grid_propagate(False)
-        # implement stretchability
+
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
         

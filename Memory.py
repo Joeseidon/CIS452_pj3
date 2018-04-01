@@ -42,7 +42,6 @@ class RAM(LabelFrame):
         
         ccount = executable.getCodePageCount()
         dcount = executable.getDataPageCount()
-        print("dcount: "+str(dcount)+" ccount:"+str(ccount))
         for i in range(ccount):
             for x in self.frame_list:
                 if(x.isFree()):
@@ -64,16 +63,13 @@ class RAM(LabelFrame):
     
     def printMemoryTable(self,display):
         x = 0
-        #print("Physical Memory <-> Frame Table")
         display.insert(INSERT,"\nPhysical Memory <-> Frame Table"+"\n")
         display.insert(INSERT,"FRAME:\tPID:\tTYPE:\tPAGE:"+"\n")
-        #print("FRAME:\tPID:\tTYPE:\tPAGE:")
+
         for i in self.frame_Table["frameID"]:
             if len(self.frame_Table["PID"]) <= x :
-                #print(str(i) + "\t--\t--\t--")
                 display.insert(INSERT,(str(i) + "\t--\t--\t--")+"\n")
             else:
-                #print(str(i) + "\t" + str(self.frame_Table["PID"][x]) + "\t" + str(self.frame_Table["Segment"][x]) + "\t" + str(self.frame_Table["PageNum"][x]))
                 display.insert(INSERT,(str(i) + "\t" + str(self.frame_Table["PID"][x]) + "\t" + str(self.frame_Table["Segment"][x]) + "\t" + str(self.frame_Table["PageNum"][x])+"\n"))
                 x=x+1
       
@@ -81,17 +77,13 @@ class RAM(LabelFrame):
         #if process cannot be removed, set to false
         status = True
         
-        #for i in self.frame_Table['PID']:
         l = len(self.frame_Table['PID'])
         for i in range(l-1,-1,-1):
-            #print('comparing: i=' + str(self.frame_Table['PID'][i])+" to pid="+str(PID) + " len="+str(len(self.frame_Table['PID'])))
             if self.frame_Table['PID'][i] == PID:
                 del self.frame_Table['PID'][i]
                 self.frame_list[self.frame_Table['frameID'][i]].freeFrame()
                 del self.frame_Table['frameID'][i]
                 del self.frame_Table['Segment'][i]
                 del self.frame_Table['PageNum'][i]
-                
-        
         
         return status
