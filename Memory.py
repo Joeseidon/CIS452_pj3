@@ -65,7 +65,7 @@ class RAM(LabelFrame):
     def printMemoryTable(self,display):
         x = 0
         #print("Physical Memory <-> Frame Table")
-        display.insert(INSERT,"Physical Memory <-> Frame Table"+"\n")
+        display.insert(INSERT,"\nPhysical Memory <-> Frame Table"+"\n")
         display.insert(INSERT,"FRAME:\tPID:\tTYPE:\tPAGE:"+"\n")
         #print("FRAME:\tPID:\tTYPE:\tPAGE:")
         for i in self.frame_Table["frameID"]:

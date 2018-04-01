@@ -25,7 +25,7 @@ processQueue = []
 
 def processCMD(cmdStr):
     words = cmdStr.split(" ") 
-    
+    outputText.insert(INSERT,"======================================================\n")
     if words[1] == '-1\n' or words[1] == '-1':
         output = 'PID: ' + words[0] + ' Terminates\n'
         intext = words[0] + " " + words[1] + "\n"
@@ -49,7 +49,7 @@ def processCMD(cmdStr):
         
         processQueue.append(x)
         
-        x.printPageTables(display=outputText)
+        #x.printPageTables(display=outputText)
         
         #Allocate Memory
         if ram.loadProcess(x):
@@ -61,6 +61,9 @@ def processCMD(cmdStr):
             x.printPageTables(display=outputText)
         
     ram.printMemoryTable(display=outputText)
+    
+    outputText.insert(INSERT,"\n\n")
+    
         
         
     

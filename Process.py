@@ -13,9 +13,6 @@ class process(object):
     classdocs
     '''
     
-    
-    
-    
     def __init__(self, dataSize, codeSize, processID, frameSize):
         '''
         Constructor
@@ -39,7 +36,7 @@ class process(object):
     def printPageTables(self,display):
         #print("Process: "+str(self.PID))
         #print("TYPE:\tPAGE:\tFRAME")
-        display.insert(INSERT,"Process: "+str(self.PID)+"\n")
+        display.insert(INSERT,"\nProcess: "+str(self.PID)+" Page Table\n")
         display.insert(INSERT,("TYPE:\tPAGE:\tFRAME")+"\n")
         for i in self.dataPageTable["Page"]:
             #print("data\t"+str(i)+"\t"+str(self.dataPageTable["Frame"][i]))

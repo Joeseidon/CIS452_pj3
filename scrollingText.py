@@ -32,3 +32,4 @@ class TextObj(tki.Frame):
         
     def insert(self,updateMethod,text):
         self.txt.insert(updateMethod,text)
+        self.txt.see("end")
