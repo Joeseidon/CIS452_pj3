@@ -4,9 +4,9 @@ Created on Mar 28, 2018
 @author: joe
 '''
 from math import ceil
-from test.test_codecs import CodePageTest
-from pip._vendor.distlib.locators import Page
-from tkinter import *
+#from test.test_codecs import CodePageTest
+#from pip._vendor.distlib.locators import Page
+from tkinter import INSERT
 
 class process(object):
 

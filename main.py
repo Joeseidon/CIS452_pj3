@@ -3,14 +3,14 @@ Created on Mar 27, 2018
 
 @author: joe
 '''
-from tkinter import *
+import tkinter as tk
 from Memory import RAM
 from Process import process
 from asyncio.tasks import wait
 from scrollingText import TextObj
 
 #Main window
-root = Tk()
+root = tk.Tk()
 
 #Scrolling text frames
 inputText = TextObj(root)
@@ -28,7 +28,7 @@ def processCMD(cmdStr):
     words = cmdStr.split(" ") 
     
     #Print line for user friendly output
-    outputText.insert(INSERT,"======================================================\n")
+    outputText.insert(tk.INSERT,"======================================================\n")
     
     #Process Termination Sequence
     if words[1] == '-1\n' or words[1] == '-1':
@@ -36,8 +36,8 @@ def processCMD(cmdStr):
         output = 'PID: ' + words[0] + ' Terminates\n'
         intext = words[0] + " " + words[1] + "\n"
         
-        inputText.insert(INSERT,intext)
-        outputText.insert(INSERT,output) 
+        inputText.insert(tk.INSERT,intext)
+        outputText.insert(tk.INSERT,output) 
               
         #Remove process = PID from process queue and reallocate memory
         ram.removeProcess(int(words[0]))
@@ -46,8 +46,8 @@ def processCMD(cmdStr):
         intext = words[0] + " " + words[1] + " " + words[2] + "\n"
         output = 'PID: ' + words[0] + ' arrives: '+'\tCode/Text: ' + words[1] + '\tData: ' + words[2]
         
-        inputText.insert(INSERT,intext)
-        outputText.insert(INSERT,output)
+        inputText.insert(tk.INSERT,intext)
+        outputText.insert(tk.INSERT,output)
         
         #Convert input string into usable int values
         PID = int(words[0])
@@ -66,7 +66,7 @@ def processCMD(cmdStr):
         
     ram.printMemoryTable(display=outputText)
     
-    outputText.insert(INSERT,"\n\n")    
+    outputText.insert(tk.INSERT,"\n\n")    
         
 #This method is linked to the next button on the main window
 #and controls the operation of this program.   
@@ -86,12 +86,12 @@ if __name__ == '__main__':
         cmdCount = len(inputCMDs)
     
     #Insert text frames into main window
-    inputText.pack(side=LEFT)
-    outputText.pack(side=RIGHT)
+    inputText.pack(side=tk.LEFT)
+    outputText.pack(side=tk.RIGHT)
     
     #Add button to main window
-    button = Button(root, text="Next", command=nextCMD)
-    button.pack(side=BOTTOM)
+    button = tk.Button(root, text="Next", command=nextCMD)
+    button.pack(side=tk.BOTTOM)
     
     #Application Loop
     root.mainloop(0)

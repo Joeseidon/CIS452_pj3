@@ -12,7 +12,10 @@ class RAM(LabelFrame):
     '''
     frame_list = []
     
-    frame_Table = {"frameID" : [], "PID" : [], "Segment" : [], "PageNum" : []}
+    frame_Table = {"frameID" : [],
+                    "PID" : [],
+                    "Segment" : [],
+                    "PageNum" : []}
     
     
     def __init__(self, master, numFrames, FrameSize):
@@ -23,17 +26,26 @@ class RAM(LabelFrame):
         #self.grid()
         self.createFrames(numFrames, FrameSize)
         
+        
         self.pack(fill="both", expand="yes")
     
     def createFrames(self, numFrames, FrameSize): 
         for i in range(numFrames):
             self.frame_list.append(MemFrame(self, FrameSize, i))
+            self.frame_Table['frameID'].append(i)
+            #create table
+            self.frame_Table['PID'].append(None)
+            self.frame_Table['Segment'].append(None)
+            self.frame_Table['PageNum'].append(None)
             
     def loadTable(self,frame,pid,segment,pagenum):
-        self.frame_Table['PID'].append(pid)
-        self.frame_Table['frameID'].append(frame)
-        self.frame_Table['Segment'].append(segment)
-        self.frame_Table['PageNum'].append(pagenum)
+        for x in self.frame_Table["frameID"]:
+            if x == frame:  
+                self.frame_Table['PID'][x]=pid
+                #self.frame_Table['frameID'].append(frame)
+                self.frame_Table['Segment'][x] = segment
+                self.frame_Table['PageNum'][x] = pagenum
+                break;
             
     def loadProcess(self, executable):
         #if process cannot be added, set to false
@@ -62,16 +74,14 @@ class RAM(LabelFrame):
         return pstatus & cstatus
     
     def printMemoryTable(self,display):
-        x = 0
         display.insert(INSERT,"\nPhysical Memory <-> Frame Table"+"\n")
         display.insert(INSERT,"FRAME:\tPID:\tTYPE:\tPAGE:"+"\n")
 
         for i in self.frame_Table["frameID"]:
-            if len(self.frame_Table["PID"]) <= x :
+            if self.frame_Table["PID"][i] == None :
                 display.insert(INSERT,(str(i) + "\t--\t--\t--")+"\n")
             else:
-                display.insert(INSERT,(str(i) + "\t" + str(self.frame_Table["PID"][x]) + "\t" + str(self.frame_Table["Segment"][x]) + "\t" + str(self.frame_Table["PageNum"][x])+"\n"))
-                x=x+1
+                display.insert(INSERT,(str(i) + "\t" + str(self.frame_Table["PID"][i]) + "\t" + str(self.frame_Table["Segment"][i]) + "\t" + str(self.frame_Table["PageNum"][i])+"\n"))
       
     def removeProcess(self, PID):
         #if process cannot be removed, set to false
@@ -80,10 +90,10 @@ class RAM(LabelFrame):
         l = len(self.frame_Table['PID'])
         for i in range(l-1,-1,-1):
             if self.frame_Table['PID'][i] == PID:
-                del self.frame_Table['PID'][i]
+                self.frame_Table['PID'][i]= None
                 self.frame_list[self.frame_Table['frameID'][i]].freeFrame()
-                del self.frame_Table['frameID'][i]
-                del self.frame_Table['Segment'][i]
-                del self.frame_Table['PageNum'][i]
+                #del self.frame_Table['frameID'][i]
+                self.frame_Table['Segment'][i] = None
+                self.frame_Table['PageNum'][i] = None
         
         return status

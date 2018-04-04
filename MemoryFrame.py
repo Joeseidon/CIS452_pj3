@@ -3,8 +3,8 @@ Created on Mar 27, 2018
 
 @author: joe
 '''
-from tkinter import *
-from pip._vendor.distlib.locators import Page
+from tkinter import Label, BOTTOM, RAISED
+#from pip._vendor.distlib.locators import Page
 
 class MemFrame(Label):
     
