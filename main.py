@@ -6,7 +6,6 @@ Created on Mar 27, 2018
 import tkinter as tk
 from Memory import RAM
 from Process import process
-from asyncio.tasks import wait
 from scrollingText import TextObj
 
 #Main window
@@ -34,7 +33,7 @@ def processCMD(cmdStr):
     if words[1] == '-1\n' or words[1] == '-1':
         #Print input commands
         output = 'PID: ' + words[0] + ' Terminates\n'
-        intext = words[0] + " " + words[1] + "\n"
+        intext = words[0] + " " + words[1]
         
         inputText.insert(tk.INSERT,intext)
         outputText.insert(tk.INSERT,output) 
@@ -43,7 +42,7 @@ def processCMD(cmdStr):
         ram.removeProcess(int(words[0]))
     else: #Process Loading Sequence
         #Print out cmd string components
-        intext = words[0] + " " + words[1] + " " + words[2] + "\n"
+        intext = words[0] + " " + words[1] + " " + words[2]
         output = 'PID: ' + words[0] + ' arrives: '+'\tCode/Text: ' + words[1] + '\tData: ' + words[2]
         
         inputText.insert(tk.INSERT,intext)
@@ -81,7 +80,7 @@ if __name__ == '__main__':
     inputCMDs=[]
     
     #Read commands from file
-    with open("testfile.txt", "r") as file:
+    with open("testfile2.txt", "r") as file:
         inputCMDs=(file.readlines())
         cmdCount = len(inputCMDs)
     

@@ -4,8 +4,6 @@ Created on Mar 28, 2018
 @author: joe
 '''
 from math import ceil
-#from test.test_codecs import CodePageTest
-#from pip._vendor.distlib.locators import Page
 from tkinter import INSERT
 
 class process(object):
@@ -20,7 +18,7 @@ class process(object):
         self.PID = processID
         
     
-        #maps data and code sections to pages and frames
+        #maps data and code sections: pages <-> frames
         self.dataPageTable = {"Page" : [], "Frame" : []}
         self.codePageTable = {"Page" : [], "Frame" : []}
         

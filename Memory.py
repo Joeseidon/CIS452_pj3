@@ -13,9 +13,10 @@ class RAM(LabelFrame):
     frame_list = []
     
     frame_Table = {"frameID" : [],
-                    "PID" : [],
-                    "Segment" : [],
-                    "PageNum" : []}
+                   "PID" : [],
+                   "Segment" : [],
+                   "PageNum" : []
+                   }
     
     
     def __init__(self, master, numFrames, FrameSize):
