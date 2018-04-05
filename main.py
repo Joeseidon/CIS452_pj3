@@ -54,7 +54,7 @@ def processCMD(cmdStr):
         codeSIZE = int(words[1])
         
         #Create Processes
-        x = process(dataSIZE,codeSIZE,PID,500)
+        x = process(dataSIZE,codeSIZE,PID,512)
         
         #Allocate Memory
         if ram.loadProcess(x):
@@ -80,7 +80,7 @@ if __name__ == '__main__':
     inputCMDs=[]
     
     #Read commands from file
-    with open("testfile2.txt", "r") as file:
+    with open("testfile.txt", "r") as file:
         inputCMDs=(file.readlines())
         cmdCount = len(inputCMDs)
     

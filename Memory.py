@@ -84,10 +84,7 @@ class RAM(LabelFrame):
             else:
                 display.insert(INSERT,(str(i) + "\t" + str(self.frame_Table["PID"][i]) + "\t" + str(self.frame_Table["Segment"][i]) + "\t" + str(self.frame_Table["PageNum"][i])+"\n"))
       
-    def removeProcess(self, PID):
-        #if process cannot be removed, set to false
-        status = True
-        
+    def removeProcess(self, PID):       
         l = len(self.frame_Table['PID'])
         for i in range(l-1,-1,-1):
             if self.frame_Table['PID'][i] == PID:
@@ -96,5 +93,3 @@ class RAM(LabelFrame):
                 #del self.frame_Table['frameID'][i]
                 self.frame_Table['Segment'][i] = None
                 self.frame_Table['PageNum'][i] = None
-        
-        return status
